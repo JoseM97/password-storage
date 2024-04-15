@@ -1,0 +1,19 @@
+ion-card {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    ion-card-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: #252525;
+        color: #FFF;
+    }
+
+    ion-card-content {
+        background-color: #181818;
+        height: 150px;
+    }
+  }

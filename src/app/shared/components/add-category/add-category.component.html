@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="modal.dismiss()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Crear categoría</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form formGroup="addCategoryForm">
+    <ion-input formControl="title" label="Título"></ion-input>
+
+    <ion-select label="Color">
+      <ion-select-option value="#001386">Azul</ion-select-option>
+      <ion-select-option value="#860000">Rojo</ion-select-option>
+      <ion-select-option value="#008642">Verde</ion-select-option>
+      <ion-select-option value="#680086">Lila</ion-select-option>
+      <ion-select-option value="#860046">Rosa</ion-select-option>
+      <ion-select-option value="#252525">Negro</ion-select-option>
+    </ion-select>
+
+    <ion-button (click)="modal.dismiss()">añadir</ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,39 @@
+ion-content {
+  --background: #AFAFAF
+}
+
+ion-toolbar {
+  --background: #252525;
+  --color: white;
+  padding: 0 5px 0 5px;
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+
+  ion-thumbnail {
+    max-width: 60px;
+    max-height: auto;
+    margin-right: 5px;
+  }
+
+  ion-title {
+    padding: 0;
+  }
+
+  
+}
+
+.header-box {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #252525;
+  margin: 10px 10px 0 10px;
+  border-radius: 10px;
+
+  p {
+    font-size: 18px;
+  }
+  }
