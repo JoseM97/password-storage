@@ -1,0 +1,7 @@
+{
+  "name": "password-storage",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
