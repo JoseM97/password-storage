@@ -1,8 +1,18 @@
-<ion-card>
-  <ion-card-header>
+<ion-card (click)="goToCategory(category.getTitle())">
+  <ion-card-header [ngClass]="{
+    'color-blue': category.getColor()==='#001386',
+    'color-red': category.getColor()==='#860000',
+    'color-green': category.getColor()==='#008642',
+    'color-purple': category.getColor()==='#680086',
+    'color-rose': category.getColor()==='#860046',
+    'color-black': category.getColor()==='#252525'}">
     <ion-label style="font-size: 15px; padding-left: 3px;"><strong>{{category.getTitle()}}</strong></ion-label>
   </ion-card-header>
   <ion-card-content>
-
+    <div *ngIf="category.getSites().length <= 0"
+      style="height: 100%; display: flex; flex-flow: column; align-items: center; justify-content: center;">
+      <img style="width: 60px;" src="assets/images/no-data.svg" alt="no-data">
+      <ion-text style="margin: 0; padding: 0; font-size: 12px;">No hay contraseñas guardadas.</ion-text>
+    </div>
   </ion-card-content>
 </ion-card>

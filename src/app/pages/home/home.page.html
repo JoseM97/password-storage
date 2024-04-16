@@ -3,16 +3,11 @@
     <ion-thumbnail slot="start">
       <img src="assets/images/appchedosol-logo_FINAL.png" alt="logo-jm">
     </ion-thumbnail>
-    <ion-title>Password storage</ion-title>
+    <ion-title><strong>Firmas</strong></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="header-box" (click)="openAddCategoryModal()">
-    <ion-icon size="large" name="add-outline"></ion-icon>
-    <p>Crear categoría</p>
-  </div>
-
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let category of categories">
@@ -21,3 +16,11 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-button expand="block" (click)="openAddCategoryModal()">
+      <strong style="color: white;">añadir categoría</strong>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

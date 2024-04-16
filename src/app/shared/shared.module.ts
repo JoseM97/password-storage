@@ -4,6 +4,7 @@ import { AddCategoryComponent } from './components/add-category/add-category.com
 import { AddSiteComponent } from './components/add-site/add-site.component';
 import { CategoryComponent } from './components/category/category.component';
 import { IonicModule } from '@ionic/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,7 @@ import { IonicModule } from '@ionic/angular';
   exports: [AddCategoryComponent, AddSiteComponent, CategoryComponent],
   declarations: [AddCategoryComponent, AddSiteComponent, CategoryComponent],
   imports: [
-    CommonModule, IonicModule
+    CommonModule, IonicModule, FormsModule, ReactiveFormsModule
   ]
 })
 export class SharedModule { }

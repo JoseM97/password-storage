@@ -51,8 +51,10 @@ ion-header {
 }
 
 ion-button {
-  margin: 10px 10px 10px 10px;
-  --background: #23853d;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --color: white;
+  --background: #181818;
 }
 
 ion-footer {

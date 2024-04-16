@@ -18,12 +18,14 @@ export class AddCategoryComponent  implements OnInit {
     this.makeForm();
   }
 
-  addCategory(title: string, color: string) {
-    const category = new Category(color, title);
-    this.modal.dismiss(category, 'completed')
+  addCategory() {
+    console.log(this.addCategoryForm.get('title')?.value);
+    console.log(this.addCategoryForm.get('color')?.value);
+    const aux = new Category(this.addCategoryForm.get('color')?.value, this.addCategoryForm.get('title')?.value);
+    this.modal.dismiss(aux, 'completed');
   }
 
-  makeForm() {
+  private makeForm(): void {
     this.addCategoryForm = new FormGroup({
       color: new FormControl(null, [
         Validators.required,

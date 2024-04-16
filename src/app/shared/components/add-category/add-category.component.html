@@ -1,27 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="modal.dismiss()">
-        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Crear categoría</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content style="--background: #252525;">
+  <div style="padding: 150px 20px 0 20px;">
 
-<ion-content>
-  <form formGroup="addCategoryForm">
-    <ion-input formControl="title" label="Título"></ion-input>
+    <div style="display: flex;">
+      <div style="width: 70%; font-size: 30px;">
+        <ion-text><strong>Añadir nueva categoría</strong></ion-text>
+      </div>
+      <div style="width: 30%; display: flex; justify-content: flex-end;">
+        <ion-buttons>
+          <ion-button (click)="modal.dismiss()">
+            <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
 
-    <ion-select label="Color">
-      <ion-select-option value="#001386">Azul</ion-select-option>
-      <ion-select-option value="#860000">Rojo</ion-select-option>
-      <ion-select-option value="#008642">Verde</ion-select-option>
-      <ion-select-option value="#680086">Lila</ion-select-option>
-      <ion-select-option value="#860046">Rosa</ion-select-option>
-      <ion-select-option value="#252525">Negro</ion-select-option>
-    </ion-select>
+    <form [formGroup]="addCategoryForm">
+      <ion-input formControlName="title" label="Título" label-placement="floating" fill="outline"
+        placeholder="Título para la categoría"></ion-input>
+      <ion-select formControlName="color" label="Color" fill="outline">
+        <ion-select-option value="#001386">Azul</ion-select-option>
+        <ion-select-option value="#860000">Rojo</ion-select-option>
+        <ion-select-option value="#008642">Verde</ion-select-option>
+        <ion-select-option value="#680086">Lila</ion-select-option>
+        <ion-select-option value="#860046">Rosa</ion-select-option>
+        <ion-select-option value="#252525">Negro</ion-select-option>
+      </ion-select>
 
-    <ion-button (click)="modal.dismiss()">añadir</ion-button>
-  </form>
+
+      <ion-button expand="block" [disabled]="!addCategoryForm.valid" (click)="addCategory()"><strong
+          style="color: white;">añadir</strong></ion-button>
+
+    </form>
+  </div>
 </ion-content>

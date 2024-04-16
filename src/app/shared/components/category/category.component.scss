@@ -8,7 +8,6 @@ ion-card {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        background-color: #252525;
         color: #FFF;
     }
 
@@ -17,3 +16,10 @@ ion-card {
         height: 150px;
     }
   }
+
+ .color-blue{ background-color: #001386;}
+ .color-red{ background-color: #860000;}
+ .color-green{ background-color: #008642;}
+ .color-purple{ background-color: #680086;}
+ .color-rose{ background-color: #860046;}
+ .color-black{ background-color: #252525;}

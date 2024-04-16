@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-thumbnail slot="start">
+      <img src="assets/images/appchedosol-logo_FINAL.png" alt="logo-jm">
+    </ion-thumbnail>
+    <ion-title><strong>{{category.getTitle()}}</strong></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let site of sites">
+    <ion-card-header style="background-color: #181818;">
+      <ion-card-title style="color: white;">{{site.getTitle()}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="background-color: #252525; padding: 5px 10px 5px 10px;">
+      <div style="display: flex; align-items: center;">
+        <div style="width: 100%; color: white;">{{site.getUser()}}</div>
+        <ion-button fill="clear">
+          <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div style="width: 100%; color: white;">{{site.getPassword()}}</div>
+        <ion-button fill="clear">
+          <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-button expand="block" (click)="openAddCategoryModal()">
+      <strong style="color: white;">añadir contraseña</strong>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
