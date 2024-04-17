@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-thumbnail slot="start">
+    <ion-buttons slot="start">
+      <ion-back-button [text]="''"></ion-back-button>
+    </ion-buttons>
+    <ion-thumbnail slot="end">
       <img src="assets/images/appchedosol-logo_FINAL.png" alt="logo-jm">
     </ion-thumbnail>
     <ion-title><strong>{{category.getTitle()}}</strong></ion-title>
