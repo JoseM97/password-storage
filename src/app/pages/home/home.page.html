@@ -19,6 +19,12 @@
 
 <ion-footer [translucent]="true">
   <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)="setCategory()">set</ion-button>
+      <ion-button (click)="getCategory()">get</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
     <ion-button expand="block" (click)="openAddCategoryModal()">
       <strong style="color: white;">añadir categoría</strong>
     </ion-button>
