@@ -22,34 +22,35 @@ export class HomePage implements OnInit{
     this.sites = [];
   }
   ngOnInit(): void {
-    this.categories.push(
-      new Category('#252525', 'Albaranes'));
-    this.categories.push(
-      new Category('#252525', 'Facturas'));
-    this.categories.push(
-      new Category('#252525', 'Presupuestos'));
-
-    this.sites.push(
-      new Site('Albaranes', '@YO', '123132'));
-    this.sites.push(
-      new Site('Facturas', '@TU', '1231321asd'));
-    this.sites.push(
-      new Site('Presupuestos', '@JM', 'sadas654dfg3dasdf_dsda'));
+    //Preferences.clear();
+    this.getCategories();
   }
 
-  async getCategory() {
-    const { value } = await Preferences.get({ key: 'categories' });
-    if(value != null) {
-      console.log(JSON.parse(value));
-    }
+  async getCategories() {
+    (await Preferences.keys()).keys.forEach(async element => {
+      // We get data from keys
+      const category = await Preferences.get({ key: element });
+      // Then we saved that data on aux parsing it
+      const aux = JSON.parse(category.value || '{}');
+      // Create foreach key a new categry Object
+      const categoryAux = new Category(aux['color'], aux['title']);
+      // Setting sites from this category
+      categoryAux.setSites(aux['sites']);
+      // Push the new category to array list
+      this.categories.push(categoryAux);
+      console.log(aux['title']);
+    });
   }
 
-  async setCategory() {
-    this.categories[0].setSites(this.sites);
+  async setCategory(key: string, color: string, sites: Site[]) {
     await Preferences.set({
-        key: 'categories',
-        value: JSON.stringify(this.categories),
-      });
+      key: key,
+      value: JSON.stringify({
+        title: key,
+        color: color,
+        sites: sites
+      })
+    });
   }
 
   async openAddCategoryModal() {
@@ -68,6 +69,7 @@ export class HomePage implements OnInit{
 
   addNewCategory(category: Category) {
     this.categories.push(category);
+    this.setCategory(category.getTitle(), category.getColor(), category.getSites());
   }
 
 }

@@ -1,3 +1,33 @@
-<p>
-  add-site works!
-</p>
+<ion-content style="--background: #252525;">
+  <div style="padding: 150px 20px 0 20px;">
+
+    <div style="display: flex;">
+      <div style="width: 70%; font-size: 30px; display: flex; align-items: center;">
+        <ion-text><strong>Añadir credenciales</strong></ion-text>
+      </div>
+      <div style="width: 30%; display: flex; justify-content: flex-end;">
+        <ion-buttons>
+          <ion-button (click)="modal.dismiss()">
+            <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+
+    <form [formGroup]="addSiteForm">
+      <ion-input formControlName="title" label="Título" label-placement="floating" fill="outline"
+        placeholder="Título para la categoría"></ion-input>
+      
+      <ion-input formControlName="user" label="Usuario" label-placement="floating" fill="outline"
+      placeholder="Usuario/email"></ion-input>
+
+      <ion-input formControlName="password" label="Contraseña" label-placement="floating" fill="outline"
+      placeholder="Contraseña" type="password"></ion-input>
+
+
+      <ion-button expand="block" [disabled]="!addSiteForm.valid" (click)="addSite()"><strong
+          style="color: white;">añadir</strong></ion-button>
+
+    </form>
+  </div>
+</ion-content>
