@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Category } from 'src/app/core/models/category.model';
 import { AddCategoryComponent } from 'src/app/shared/components/add-category/add-category.component';
-import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/core/services/category.service';
 import { Preferences } from '@capacitor/preferences';
-import { Site } from 'src/app/core/models/site.model';
 
 @Component({
   selector: 'app-home',
@@ -13,44 +12,36 @@ import { Site } from 'src/app/core/models/site.model';
 })
 export class HomePage implements OnInit{
   categories: Category[];
-  sites: Site[];
+  category!: Category;
 
   constructor(
     private modal: ModalController,
+    private categoryService: CategoryService
   ) {
     this.categories = [];
-    this.sites = [];
   }
   ngOnInit(): void {
     //Preferences.clear();
     this.getCategories();
+    //console.log(Preferences.keys());
+  }
+
+  ionViewDidEnter(): void {
+    this.getCategories();
   }
 
   async getCategories() {
-    (await Preferences.keys()).keys.forEach(async element => {
-      // We get data from keys
-      const category = await Preferences.get({ key: element });
-      // Then we saved that data on aux parsing it
-      const aux = JSON.parse(category.value || '{}');
-      // Create foreach key a new categry Object
-      const categoryAux = new Category(aux['color'], aux['title']);
-      // Setting sites from this category
-      categoryAux.setSites(aux['sites']);
-      // Push the new category to array list
-      this.categories.push(categoryAux);
-      console.log(aux['title']);
-    });
+    this.categories = await this.categoryService.getAllCategories() || [];
+    console.log(this.categories);
   }
 
-  async setCategory(key: string, color: string, sites: Site[]) {
-    await Preferences.set({
-      key: key,
-      value: JSON.stringify({
-        title: key,
-        color: color,
-        sites: sites
-      })
-    });
+  addNewCategory(category: Category) {
+    if (category) {
+      this.categories.push(category);
+      this.categoryService.saveCategories(this.categories);
+    } else {
+      console.error('Intentando agregar una categoría no válida.');
+    }
   }
 
   async openAddCategoryModal() {
@@ -65,11 +56,6 @@ export class HomePage implements OnInit{
       console.log('category');
       this.addNewCategory(data);
     }
-  }
-
-  addNewCategory(category: Category) {
-    this.categories.push(category);
-    this.setCategory(category.getTitle(), category.getColor(), category.getSites());
   }
 
 }

@@ -2,35 +2,45 @@ import { Injectable } from '@angular/core';
 import { Category } from '../models/category.model';
 import { Preferences } from '@capacitor/preferences';
 import { Site } from '../models/site.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
+  categories!: Category[];
 
   constructor() { }
 
-  getSites(category: Category) {
-    return category.getSites();
+  /**
+   * This function delete all storage and create new categories with the array given
+   * @param categories Array with all categories
+   */
+  async saveCategories(categories: Category[]) {
+    try {
+      await Preferences.set({
+        key: 'categories',
+        value: JSON.stringify(categories)
+      });
+      //console.log('Categorías guardadas correctamente.');
+    } catch (error) {
+      console.error('Error al guardar categorías:', error);
+    }
   }
 
-  async setCategory(key: string, color: string, sites: Site[]) {
-    await Preferences.set({
-      key: key,
-      value: JSON.stringify({
-        title: key,
-        color: color,
-        sites: sites
-      })
-    });
-  }
-
-  async getCategory(category: string) {
-    const aux = await Preferences.get({key: category});
-    const aux2 = JSON.parse(aux.value || '{}');
-    const categoryAux = new Category(aux2['color'], aux2['title']);
-    categoryAux.setSites(aux2['sites']);
-    console.log(categoryAux);
-    return categoryAux;
+  async getAllCategories(): Promise<Category[] | null> {
+    try {
+      const result = await Preferences.get({ key: 'categories' });
+      if (result && result.value) {
+        this.categories = JSON.parse(result.value) as Category[];
+        return this.categories as Category[];
+      } else {
+        //console.log('No hay categorías guardadas.');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error al recuperar categorías:', error);
+      return null;
+    }
   }
 }

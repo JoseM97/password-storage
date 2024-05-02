@@ -11,7 +11,8 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let category of categories">
-        <app-shared-components-category [category]="category"></app-shared-components-category>
+        <app-shared-components-category [category]="category"
+          [categories]="categories"></app-shared-components-category>
       </ion-col>
     </ion-row>
   </ion-grid>

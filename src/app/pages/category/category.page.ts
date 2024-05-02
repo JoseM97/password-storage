@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Preferences } from '@capacitor/preferences';
 import { ModalController } from '@ionic/angular';
 import { Category } from 'src/app/core/models/category.model';
 import { Site } from 'src/app/core/models/site.model';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { AddCategoryComponent } from 'src/app/shared/components/add-category/add-category.component';
 import { AddSiteComponent } from 'src/app/shared/components/add-site/add-site.component';
 
 @Component({
@@ -12,9 +10,10 @@ import { AddSiteComponent } from 'src/app/shared/components/add-site/add-site.co
   templateUrl: 'category.page.html',
   styleUrls: ['category.page.scss'],
 })
-export class CategoryPage implements OnInit{
-  sites: Site[];
+export class CategoryPage{
+  sites: Site[] = [];
   category!: Category;
+  categories!: Category[];
  
   constructor(private modal: ModalController, private categoryService: CategoryService) {
     this.category = new Category(
@@ -22,14 +21,13 @@ export class CategoryPage implements OnInit{
       history.state.category['title']
     );
 
-    console.log(this.category);
+    this.category.setSites(history.state.category['sites']);
 
-    this.sites = categoryService.getSites(this.category);
+    //console.log(this.category.getColor());
 
-    console.log(this.sites);
-  }
+    //this.sites = categoryService.getSites(this.category);
 
-  ngOnInit(): void {
+    //console.log(this.sites);
   }
 
   async openAddSiteModal() {
@@ -46,10 +44,16 @@ export class CategoryPage implements OnInit{
     }
   }
 
-  addNewSite(site: Site) {
+  async addNewSite(site: Site) {
+    this.sites = this.category.getSites();
     this.sites.push(site);
-    this.categoryService.setCategory(this.category.getTitle(), this.category.getColor(), this.sites)
-    console.log(this.sites);
+    //this.category.setSites(this.sites);
+    this.categories = await this.categoryService.getAllCategories() || [];
+    console.log('Categorias: '+this.categories);
+    this.categories.forEach(category => {
+      category['sites'] = this.sites;
+      console.log('Solo una: '+category);
+    });
   }
 
 }
