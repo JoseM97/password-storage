@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
 import { Category } from 'src/app/core/models/category.model';
+import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
   selector: 'app-shared-components-category',
@@ -12,7 +14,7 @@ export class CategoryComponent implements OnInit {
   @Input() categories!: Category[];
   newCategory!: Category;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.createCategory();

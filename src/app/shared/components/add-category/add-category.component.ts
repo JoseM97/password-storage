@@ -19,8 +19,6 @@ export class AddCategoryComponent  implements OnInit {
   }
 
   addCategory() {
-    console.log(this.addCategoryForm.get('title')?.value);
-    console.log(this.addCategoryForm.get('color')?.value);
     const aux = new Category(this.addCategoryForm.get('color')?.value, this.addCategoryForm.get('title')?.value);
     this.modal.dismiss(aux, 'completed');
   }

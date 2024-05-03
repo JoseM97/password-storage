@@ -3,7 +3,9 @@ import { ModalController } from '@ionic/angular';
 import { Category } from 'src/app/core/models/category.model';
 import { AddCategoryComponent } from 'src/app/shared/components/add-category/add-category.component';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { Preferences } from '@capacitor/preferences';
+import { DeleteAllConfirmComponent } from 'src/app/shared/components/delete-all-confirm/delete-all-confirm.component';
 
 @Component({
   selector: 'app-home',
@@ -20,19 +22,21 @@ export class HomePage implements OnInit{
   ) {
     this.categories = [];
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     //Preferences.clear();
+    await SplashScreen.show({
+      showDuration: 1000,
+      autoHide: true,
+    });
     this.getCategories();
-    //console.log(Preferences.keys());
   }
 
-  ionViewDidEnter(): void {
+  async ionViewDidEnter(): Promise<void> {
     this.getCategories();
   }
 
   async getCategories() {
     this.categories = await this.categoryService.getAllCategories() || [];
-    console.log(this.categories);
   }
 
   addNewCategory(category: Category) {
@@ -53,8 +57,21 @@ export class HomePage implements OnInit{
     const {data, role} = await modal.onWillDismiss();
 
     if(role === 'completed') {
-      console.log('category');
       this.addNewCategory(data);
+    }
+  }
+
+  async openDeleteAllModal() {
+    const modal = await this.modal.create({
+      component: DeleteAllConfirmComponent,
+    });
+    await modal.present();
+
+    const {role} = await modal.onWillDismiss();
+
+    if(role === 'completed') {
+      Preferences.clear();
+      this.categoryService.saveCategories(this.categories);
     }
   }
 

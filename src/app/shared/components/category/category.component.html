@@ -1,18 +1,26 @@
-<ion-card (click)="goToCategory(newCategory.getTitle())">
-  <ion-card-header [ngClass]="{
+<ion-card style="display: flex; flex-direction: column;">
+  <ion-card-header (click)="goToCategory(newCategory.getTitle())" [ngClass]="{
     'color-blue': newCategory.getColor()==='#001386',
     'color-red': newCategory.getColor()==='#860000',
     'color-green': newCategory.getColor()==='#008642',
     'color-purple': newCategory.getColor()==='#680086',
     'color-rose': newCategory.getColor()==='#860046',
     'color-black': newCategory.getColor()==='#252525'}">
-    <ion-label style="font-size: 15px; padding-left: 3px;"><strong>{{newCategory.getTitle()}}</strong></ion-label>
+    <ion-label style="font-size: 25px; padding-left: 3px;">
+      <strong>{{newCategory.getTitle()}}</strong>
+    </ion-label>
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content (click)="goToCategory(newCategory.getTitle())" style="overflow: hidden;">
     <div *ngIf="newCategory.getSites().length <= 0"
       style="height: 100%; display: flex; flex-flow: column; align-items: center; justify-content: center;">
-      <img style="width: 60px;" src="assets/images/no-data.svg" alt="no-data">
-      <ion-text style="margin: 0; padding: 0; font-size: 12px;">No hay contraseñas guardadas.</ion-text>
+      <ion-text style="margin: 0; padding: 0; font-size: 20px; text-align: center;">No hay datos.</ion-text>
+    </div>
+
+    <div *ngIf="newCategory.getSites().length > 0"
+      style="height: 100%; display: flex; flex-flow: column; align-items: center; justify-content: center;">
+      <div *ngFor="let site of newCategory.getSites()">
+        <p style="font-size: 20px;">{{site['title']}}</p>
+      </div>
     </div>
   </ion-card-content>
 </ion-card>

@@ -20,9 +20,6 @@ export class AddSiteComponent  implements OnInit {
   }
 
   addSite() {
-    console.log(this.addSiteForm.get('title')?.value);
-    console.log(this.addSiteForm.get('user')?.value);
-    console.log(this.addSiteForm.get('password')?.value);
     const aux = new Site(this.addSiteForm.get('title')?.value, this.addSiteForm.get('user')?.value, this.addSiteForm.get('password')?.value);
     this.modal.dismiss(aux, 'completed');
   }

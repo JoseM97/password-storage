@@ -1,0 +1,22 @@
+<ion-content style="--background: #252525;">
+  <div style="padding: 150px 20px 0 20px;">
+
+    <div style="display: flex;">
+      <div style="width: 70%; font-size: 30px; display: flex; align-items: center;">
+        <ion-text><strong>¿Seguro que quieres borrar todos los datos?</strong></ion-text>
+      </div>
+      <div style="width: 30%; display: flex; justify-content: flex-end;">
+        <ion-buttons>
+          <ion-button (click)="modal.dismiss()">
+            <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+    <div>
+      <p>Al pulsar borrar confirmarás que quieres borrar todas las categorías con las contraseñas incluidas.</p>
+    </div>
+    <ion-button color="danger" expand="block" (click)="deleteConfirm()"><strong
+        style="color: white;">borrar</strong></ion-button>
+  </div>
+</ion-content>

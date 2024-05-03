@@ -11,25 +11,43 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngFor="let site of sites">
-    <ion-card-header style="background-color: #181818;">
-      <ion-card-title style="color: white;">{{site.getTitle()}}</ion-card-title>
+  <ion-card *ngFor="let site of this.category.getSites()">
+    <ion-card-header
+      style="background-color: #181818; display: flex; flex-direction: row; align-items: center; width: 100%;">
+      <ion-card-title
+        style="color: white; width: 65%; font-size: 25px;"><strong>{{site['title']}}</strong></ion-card-title>
+
+      <ion-button style="margin: 0px;" fill="outline" color="success"
+        (click)="share(site['title'], site['user'], site['password'])">
+        compartir
+      </ion-button>
     </ion-card-header>
-    <ion-card-content style="background-color: #252525; padding: 5px 10px 5px 10px;">
-      <div style="display: flex; align-items: center;">
-        <div style="width: 100%; color: white;">{{site.getUser()}}</div>
-        <ion-button fill="clear">
+    <ion-card-content style="background-color: #252525; padding: 0;">
+      <div style="display: flex; align-items: center; padding: 16px; justify-content: space-between;">
+        <div style="width: 70%; color: white; font-size: 20px;">{{site['user']}}</div>
+        <ion-button fill="clear" style="margin: 0;" (click)="copyPaste(site['user'])">
           <ion-icon name="copy-outline"></ion-icon>
         </ion-button>
       </div>
-      <div style="display: flex; align-items: center;">
-        <div style="width: 100%; color: white;">{{site.getPassword()}}</div>
-        <ion-button fill="clear">
+      <div style="display: flex; align-items: center; padding: 16px; justify-content: space-between;">
+        <div style="width: 70%; color: white; font-size: 20px;">•••••••••</div>
+        <ion-button fill="clear" style="margin: 0;" (click)="copyPaste(site['password'])">
           <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <div style="width: 100%; display: flex; justify-content: center; padding: 16px;">
+        <ion-button style="width: 30%; margin: 0;" color="danger" (click)="deleteSite(site)">
+          borrar
         </ion-button>
       </div>
     </ion-card-content>
   </ion-card>
+
+  <ion-toggle style="margin: 16px;" (ionChange)="activateDelete()">Activar borrado</ion-toggle>
+
+  <ion-button [disabled]="!canDelete" color="danger" expand="block" (click)="deleteCategory(category)">
+    borrar categoría
+  </ion-button>
 </ion-content>
 
 <ion-footer [translucent]="true">

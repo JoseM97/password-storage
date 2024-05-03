@@ -22,7 +22,6 @@ export class CategoryService {
         key: 'categories',
         value: JSON.stringify(categories)
       });
-      //console.log('Categorías guardadas correctamente.');
     } catch (error) {
       console.error('Error al guardar categorías:', error);
     }
@@ -35,7 +34,6 @@ export class CategoryService {
         this.categories = JSON.parse(result.value) as Category[];
         return this.categories as Category[];
       } else {
-        //console.log('No hay categorías guardadas.');
         return null;
       }
     } catch (error) {

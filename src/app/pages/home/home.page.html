@@ -1,18 +1,33 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar style="display: flex; flex-direction: row; justify-content: space-between;">
     <ion-thumbnail slot="start">
       <img src="assets/images/jm_logo.png" alt="logo-jm">
     </ion-thumbnail>
-    <ion-title><strong>Password storage</strong></ion-title>
+    <ion-title><strong>eclipse</strong></ion-title>
+    <!--
+    <ion-button (click)="openDeleteAllModal()" style="margin-right: 10px;" slot="end" color="danger">
+      borrar todo
+    </ion-button>
+    -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
+  <ion-grid *ngIf="categories.length > 0">
     <ion-row>
       <ion-col size="6" *ngFor="let category of categories">
         <app-shared-components-category [category]="category"
           [categories]="categories"></app-shared-components-category>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="categories.length <= 0">
+    <ion-row>
+      <ion-col size="12"
+        style="display: flex; justify-content: center; align-items: center; font-size: 25px; margin-top: 50px;">
+        <ion-icon name="fish-outline" size="large" style="margin-right: 10px;"></ion-icon>
+        No hay datos.
       </ion-col>
     </ion-row>
   </ion-grid>

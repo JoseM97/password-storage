@@ -21,6 +21,7 @@ ion-header {
       img {
         width: 100%;
         height: 100%;
+        border-radius: 100%;
       }
     }
   
@@ -54,11 +55,19 @@ ion-button {
   --padding-top: 0px;
   --padding-bottom: 0px;
   --color: white;
-  --background: #181818;
+  margin: 10px 10px 10px 10px;
+  --background: #484848;
 }
 
 ion-footer {
   ion-toolbar {
-    --background: #25252500;
+    padding: 8px;
+    ion-button {
+      --padding-top: 0px;
+      --padding-bottom: 0px;
+      --color: white;
+      margin: 10px 10px 10px 10px;
+      --background: #23853d;
+    }
   }
 }
