@@ -80,7 +80,7 @@ export class CategoryPage implements OnInit{
     await Clipboard.write({
       string: text
     });
-    alert('¡datos copiados!');
+    alert('¡Datos copiados!');
   }
 
   goToCategory(): void {
@@ -90,7 +90,6 @@ export class CategoryPage implements OnInit{
   async deleteCategory(categoryGiven: any) {
     this.categories.forEach(category => {
       if(categoryGiven['title'] === category['title']) {
-        console.log(this.categories.indexOf(category));
         this.categories.indexOf(category) == 0 ? this.categories.splice(this.categories.indexOf(category), this.categories.indexOf(category)+1) : this.categories.splice(this.categories.indexOf(category), this.categories.indexOf(category))
     
       }
@@ -102,6 +101,10 @@ export class CategoryPage implements OnInit{
 
   activateDelete() {
     this.canDelete = !this.canDelete;
+  }
+
+  togglePassword(site: any) {
+    site['showPassword'] = !site['showPassword'];
   }
 
 }
